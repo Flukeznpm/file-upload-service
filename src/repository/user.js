@@ -16,6 +16,14 @@ module.exports.createUser = async ({ email, password, emailOriginal }) => {
 	return userInsertDataFinal;
 };
 
+module.exports.getUserById = async ({ id }) => {
+	const userPath = firestore.collection('user');
+	const userQuery = await userPath.doc(id).get();
+	const user = userQuery.data();
+	user.id = id;
+	return user;
+};
+
 module.exports.getUserByEmail = async ({ email }) => {
 	const userPath = firestore.collection('user');
 	const userData = await userPath
@@ -33,4 +41,4 @@ module.exports.getUserByEmail = async ({ email }) => {
 		});
 	});
 	return userDataList[0];
-};
+}; 

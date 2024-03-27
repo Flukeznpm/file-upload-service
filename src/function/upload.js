@@ -2,6 +2,9 @@ const { cloudFrontInvalidation } = require("./cloudfront");
 const { s3Upload, s3Delete } = require("./s3Bucket");
 const { s3MultipartUpload } = require("./s3MultipartUpload");
 const uploadLogFunc = require("./uploadLog");
+const notificationFunc = require("./notification");
+const userFunc = require("./user");
+const { isObjectEmpty } = require("../util/checkObj");
 
 module.exports.uploadManagement = async ({
 	userId,
@@ -16,6 +19,15 @@ module.exports.uploadManagement = async ({
 		size,
 		action: "upload"
 	});
+
+	if (isObjectEmpty(uploadLog) === false) {
+		const { emailOriginal } = await userFunc.getUserById({ id: userId })
+		await notificationFunc.notificationManagement({
+			receivers: emailOriginal,
+			data: uploadLog,
+		});
+	}
+
 	return uploadLog;
 };
 

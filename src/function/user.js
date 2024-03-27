@@ -40,6 +40,11 @@ module.exports.createUser = async ({ email, password }) => {
 	return userResponse;
 };
 
+module.exports.getUserById = async ({ id }) => {
+	const user = await userRepo.getUserById({ id: id });
+	return user;
+};
+
 module.exports.getUserByEmail = async ({ email }) => {
 	const userByEmail = await userRepo.getUserByEmail({ email: email.toLowerCase() });
 	return userByEmail;

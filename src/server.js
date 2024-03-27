@@ -10,14 +10,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 const { authorize } = require("./middleware/authorize")
-const initialPath = require("./router/initial/index")
-const authPath = require("./router/auth/index")
-const workflowPath = require("./router/workflow/index")
+const initialPath = require("./router/initial/user")
+const authPath = require("./router/auth/access")
+const filePath = require("./router/workflow/file")
 
 app.use("/file-upload-service/initial", initialPath);
 app.use("/file-upload-service/auth", authPath);
 app.use(authorize)
-app.use("/file-upload-service/workflow", workflowPath);
+app.use("/file-upload-service/workflow/file", filePath);
 
 
 app.listen(port, () => { console.log(`Listening on port ${port}`) });
