@@ -1,4 +1,5 @@
 const { firestore } = require("../db/firestore");
+const { fileNameFormat } = require("../util/s3FileNameFormat");
 
 module.exports.createUploadLog = async ({
 	originalName,

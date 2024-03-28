@@ -40,8 +40,8 @@ module.exports.deleteManagement = async ({
 	const promises = [];
 	promises.push(s3Delete({ userId, s3FileName: uploadLogDetail.s3FileName }));
 	promises.push(uploadLogFunc.updateDocument({ id: uploadLogId, dataUpdate: { isDelete: true, deletedBy: userId } }));
-	await cloudFrontInvalidation({ key: userId + "/" + uploadLogDetail.s3FileName });
 	const [_, updatedLog] = await Promise.all(promises);
+	await cloudFrontInvalidation({ key: userId + "/" + uploadLogDetail.s3FileName });
 	return { isDelete: updatedLog.isDelete };
 };
 
