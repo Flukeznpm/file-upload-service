@@ -1,4 +1,4 @@
-const { cloudFrontInvalidation } = require("./cloudfront");
+const { cloudFrontInvalidation } = require("./cloudFront");
 const { s3Upload, s3Delete } = require("./s3Bucket");
 const { s3MultipartUpload } = require("./s3MultipartUpload");
 const uploadLogFunc = require("./uploadLog");

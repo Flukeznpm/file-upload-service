@@ -5,7 +5,7 @@ const {
 	AbortMultipartUploadCommand
 } = require('@aws-sdk/client-s3');
 const { s3Client } = require('../db/s3');
-const { v4: uuidv4 } = require('uuid');
+const { fileNameFormat } = require('../util/s3FileNameFormat');
 const {
 	S3_BUCKET_NAME,
 	CLOUDFRONT_DOMAIN
@@ -16,9 +16,7 @@ module.exports.s3MultipartUpload = async ({
 	originalName,
 	buffer,
 }) => {
-	const fileExtension = originalName?.split(".")[originalName?.split(".").length - 1];
-	const fileName = originalName?.slice(0, originalName.length - (fileExtension.length + 1));
-	const fileNameNew = `${fileName}-${new Date().getTime()}-${uuidv4()}.${fileExtension}`;
+	const { fileNameNew } = await fileNameFormat({ originalName })
 	const key = `${userId}/${fileNameNew}`;
 
 	try {

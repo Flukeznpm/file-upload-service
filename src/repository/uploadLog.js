@@ -10,10 +10,9 @@ module.exports.createUploadLog = async ({
 	createdBy,
 }) => {
 	try {
-		const fileExtension = originalName?.split(".")[originalName?.split(".").length - 1];
-		const fileNameOriginal = originalName?.slice(0, originalName.length - (fileExtension.length + 1));
+		const { fileExtension, fileName } = await fileNameFormat({ originalName })
 		const insertData = {
-			fileNameOriginal: fileNameOriginal || null,
+			fileNameOriginal: fileName || null,
 			fileExtension: fileExtension || null,
 			mimeType: mimeType || null,
 			size: size || null,

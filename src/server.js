@@ -14,6 +14,10 @@ const initialPath = require("./router/initial/user")
 const authPath = require("./router/auth/access")
 const filePath = require("./router/workflow/file")
 
+app.get('/file-upload-service', (req, res) => {
+	res.send('Hello World');
+});
+
 app.use("/file-upload-service/initial", initialPath);
 app.use("/file-upload-service/auth", authPath);
 app.use(authorize)

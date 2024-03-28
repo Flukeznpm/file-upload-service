@@ -6,7 +6,7 @@ const {
 } = require("@aws-sdk/client-s3");
 const s3Signer = require('./s3Signer');
 const https = require("https");
-const { v4: uuidv4 } = require('uuid');
+const s3FileNameFormatFunc = require('../util/s3FileNameFormat');
 const {
 	S3_BUCKET_NAME,
 	CLOUDFRONT_DOMAIN
@@ -17,9 +17,7 @@ module.exports.s3Upload = async ({
 	originalName,
 	buffer,
 }) => {
-	const fileExtension = originalName?.split(".")[originalName?.split(".").length - 1];
-	const fileName = originalName?.slice(0, originalName.length - (fileExtension.length + 1));
-	const fileNameNew = `${fileName}-${new Date().getTime()}-${uuidv4()}.${fileExtension}`;
+	const { fileNameNew } = await s3FileNameFormatFunc.fileNameFormat({ originalName })
 	const key = `${userId}/${fileNameNew}`;
 	const params = {
 		Bucket: S3_BUCKET_NAME,
