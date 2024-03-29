@@ -7,7 +7,7 @@ const {
 	SMTP_GMAIL_APP_PASS
 } = process.env;
 
-module.exports.notificationManagement = async ({ receivers, data }) => {
+module.exports.notificationManagement = ({ receivers, data }) => {
 	let receiversList = [];
 	if (typeof receivers === "string") {
 		receiversList.push(receivers);
@@ -17,8 +17,8 @@ module.exports.notificationManagement = async ({ receivers, data }) => {
 	const receiversFormat = receiversList.join(", ");
 	const subject = "Notification (File Upload Service)";
 	const message = `You have uploaded a file named "${data?.fileNameOriginal}.${data?.fileExtension}"`;
-	const sendResponse = await this.sendSMTPProviders({ receivers: receiversFormat, subject, message });
-	return sendResponse;
+	this.sendSMTPProviders({ receivers: receiversFormat, subject, message });
+	return;
 };
 
 // * Use Gmail provider for test send mail

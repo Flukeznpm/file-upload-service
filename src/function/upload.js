@@ -22,7 +22,7 @@ module.exports.uploadManagement = async ({
 
 	if (isObjectEmpty(uploadLog) === false) {
 		const { emailOriginal } = await userFunc.getUserById({ id: userId })
-		await notificationFunc.notificationManagement({
+		notificationFunc.notificationManagement({
 			receivers: emailOriginal,
 			data: uploadLog,
 		});
