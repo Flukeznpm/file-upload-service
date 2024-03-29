@@ -35,7 +35,8 @@ This service is about uploading file and send email notification when uploaded.
 ## File Library (Upload logs)
 
 `POST /file-upload-service/workflow/file/library`
-
+### Authorization
+- Bearer Token
 ### Body request
 
 ```
@@ -51,7 +52,8 @@ This service is about uploading file and send email notification when uploaded.
 ## File Upload
 
 `POST /file-upload-service/workflow/file/upload`
-
+### Authorization
+- Bearer Token
 ### form-data request
 
 - Key
@@ -60,7 +62,8 @@ This service is about uploading file and send email notification when uploaded.
 ## File Download
 
 `GET /file-upload-service/workflow/file/download?uploadLogId=`
-
+### Authorization
+- Bearer Token
 ### Query Param
 
 - uploadLogId
@@ -68,7 +71,8 @@ This service is about uploading file and send email notification when uploaded.
 ## File Delete
 
 `DELETE /file-upload-service/workflow/file/delete`
-
+### Authorization
+- Bearer Token
 ### Body request
 
 ```
