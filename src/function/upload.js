@@ -80,7 +80,7 @@ module.exports.upload = async ({
 	let uploadResult;
 	const originalName = originalname;
 
-	if (buffer.length < 100000000) { // 100 MB
+	if (buffer.length < 100000000) { // < 100 MB
 		uploadResult = await s3Upload({
 			userId,
 			originalName,
